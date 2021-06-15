@@ -1,16 +1,20 @@
 package directoryhelper
 
 import (
+	"log"
+	"os"
 	"path"
 	"path/filepath"
-	"runtime"
 )
 
 // RootDir returns the root directory of the project
 func RootDir() string {
-	_, b, _, _ := runtime.Caller(0)
-	d := path.Join(path.Dir(b))
-	return filepath.Dir(d)
+	ex, err := os.Executable()
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	return path.Dir(ex)
 }
 
 func DataDir() string {

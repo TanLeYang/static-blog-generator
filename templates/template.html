@@ -6,8 +6,128 @@
         <meta name="title" content="{{.HTMLTitle}}"/>
         <meta name="referrer" content="always"/>
         <title>{{.HTMLTitle}}</title>
-        <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+        <link rel="shortcut icon" href="./favicon.ico" type="image/x-icon" />
         <style>
+            * {
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
+            }
+
+            nav {
+                position: fixed;
+                top: 0;
+                width: 100%;
+                display: flex;
+                justify-content: space-around;
+                align-items: center;
+                min-height: 8vh;
+                background-color: #616161;
+            }
+
+            nav a {
+                color: #fafafa;
+            }
+
+            .logo {
+                color: rgb(226, 226, 226);
+                text-transform: uppercase;
+                letter-spacing: 5px;
+                font-size: 20px;
+            }
+
+            .nav-links {
+                display: flex;
+                justify-content: space-around;
+                width: 30%;
+            }
+
+            .nav-links li {
+                list-style: none;
+            }
+
+            .nav-links a {
+                color: #fafafa;
+                text-decoration: none;
+                letter-spacing: 3px;
+                font-weight: bold;
+                font-size: 14px;
+            }
+
+            .burger {
+                display: none;
+            }
+
+            .burger div {
+                width: 25px;
+                height: 3px;
+                background-color: rgb(226, 226, 226);
+                margin: 5px;
+                transition: all 0.3s ease;
+            }
+
+            @media screen and (max-width: 1024px) {
+                .nav-links {
+                    width: 60%;
+                }
+            }
+
+            @media screen and (max-width: 768px) {
+                body {
+                    overflow-x: hidden;
+                }
+                
+                .nav-links {
+                    position: fixed;
+                    right: 0px;
+                    height: 92vh;
+                    top: 8vh;
+                    background-color: #616161;
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                    width: 50%;
+                    transform: translateX(100%);
+                    transition: transform 0.5s ease-in;
+                }
+                
+                .nav-links li {
+                    opacity: 0;
+                }
+                    
+                .burger {
+                    display: block;
+                    cursor: pointer;
+                }
+            }
+
+            .nav-active {
+                    transform: translateX(0%);
+            }
+
+            @keyframes navLinkFade {
+                from {
+                    opacity: 0;
+                    transform: translateX(50px);
+                }
+                to {
+                    opacity: 1;
+                    transform: translateX(0);
+                }
+            }
+
+            .toggle .line1 {
+                transform: rotate(-45deg) translate(-5px, 6px);
+            }
+
+            .toggle .line2 {
+                opacity: 0;
+            }
+
+            .toggle .line3 {
+                transform: rotate(45deg) translate(-5px, -6px);
+            }
+
             html {
                 -ms-text-size-adjust: 100%; /* 2 */
                 -webkit-text-size-adjust: 100%; /* 2 */
@@ -43,72 +163,11 @@
                 line-height: 1.4;
                 font-weight: 400
             }
-            a:link, a:visited, a:hover, a:active {
+            #content a:link, a:visited, a:hover, a:active {
                 text-decoration: none;
-                color: #008B8B;
             }
             #contactmobile {
                 display: none;
-            }
-            #header {
-                display: flex;
-                width: 100%;
-                background-color: #fafafa;
-                color: #616161;
-            }
-            #header a {
-                color: #616161;
-            }
-            #header ul li{
-                display: inline-block;
-            }
-            #header #logo {
-                flex: 1;
-                padding: 1em;
-                vertical-align: top;
-            }
-            #header #logo #logotext {
-                display: inline-block;
-                margin-left: 5px;
-            }
-            #header #logo #logotext small {
-                font-size: x-small;
-            }
-            #header #logo strong {
-                display: block;
-                font-size: 1.2rem;
-            }
-            #header #menu {
-                flex: 2;
-                padding: 1em;
-                vertical-align: middle;
-                margin: auto;
-                text-align: left;
-            }
-            #header #menu .menuitem {
-                width: 70px;
-            }
-            #header #menu .menuitem a, svg {
-                display: block;
-                text-align: center;
-                font-size: 12px;
-                fill: #616161;
-            }
-            #header #menu .menuitem div {
-                margin-top: 2px;
-            }
-            #header #contact {
-                flex: 1;
-                padding: 1em;
-                vertical-align: middle;
-                margin: auto;
-                text-align: right;
-            }
-            #header #contact svg {
-                width: 40px;
-                height: 40px;
-                display: inline-block;
-                fill: #616161;
             }
             #taglist {
                 list-style-type: none;
@@ -118,6 +177,7 @@
             }
             #content {
                 max-width: 740px;
+                margin-top: 65px;
                 margin-left: auto;
                 margin-right: auto;
                 padding: 1em;
@@ -171,32 +231,6 @@
                 font-size: 16px;
             }
             @media only screen and (max-width: 768px), screen and (orientation: landscape) and (max-width: 640px) {
-                #header {
-                    display: block;
-                }
-                #header #logo {
-                    display: inline-block;
-                    width: 10%;
-                    padding: .2em 0 .2em .5em;
-                }
-                #header #logo #logotext {
-                    display: none;
-                }
-                #header #menu {
-                    padding: .2em 0 .2em 0;
-                    display: inline-block;
-                    width: 80%;
-                }
-                #header #menu .menuitem {
-                    width: 55px;
-                }
-                #header #menu .menuitem svg {
-                    width: 55px;
-                    height: 30px;
-                }
-                #header #contact{
-                    display: none;
-                }
                 #content p, li, table {
                     font-size: 18px;
                     word-break: break-word;
@@ -229,58 +263,65 @@
                 }
                 #contactmobile {
                     display: block;
-                    background-color: #008B8B;
+                    background-color: #616161;
                     text-align: center;
                 }
                 #contactmobile svg {
                     width: 40px;
                     height: 40px;
                     display: inline-block;
-                    fill: white;
                 }
+            }
+            #logoimage {
+                border-radius: 50%;
             }
             {{.CustomCSS}}
         </style>
     </head>
     <body>
-        <div id="header">
-            <div id="logo">
-                <a href="/">
-                    <img id="logoimage" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABcAAAAqCAYAAABYzsDTAAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAAB1WlUWHRYTUw6Y29tLmFkb2JlLnhtcAAAAAAAPHg6eG1wbWV0YSB4bWxuczp4PSJhZG9iZTpuczptZXRhLyIgeDp4bXB0az0iWE1QIENvcmUgNS40LjAiPgogICA8cmRmOlJERiB4bWxuczpyZGY9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkvMDIvMjItcmRmLXN5bnRheC1ucyMiPgogICAgICA8cmRmOkRlc2NyaXB0aW9uIHJkZjphYm91dD0iIgogICAgICAgICAgICB4bWxuczp0aWZmPSJodHRwOi8vbnMuYWRvYmUuY29tL3RpZmYvMS4wLyI+CiAgICAgICAgIDx0aWZmOkNvbXByZXNzaW9uPjE8L3RpZmY6Q29tcHJlc3Npb24+CiAgICAgICAgIDx0aWZmOk9yaWVudGF0aW9uPjE8L3RpZmY6T3JpZW50YXRpb24+CiAgICAgICAgIDx0aWZmOlBob3RvbWV0cmljSW50ZXJwcmV0YXRpb24+MjwvdGlmZjpQaG90b21ldHJpY0ludGVycHJldGF0aW9uPgogICAgICA8L3JkZjpEZXNjcmlwdGlvbj4KICAgPC9yZGY6UkRGPgo8L3g6eG1wbWV0YT4KAtiABQAAAgJJREFUSA3tVkFuwzAMc4b9qHnT+qbtTcmbMlM1Vcqx0mYosB1WIJUtkZQsq0hL+f/8Zge2llwt1twjzDVto4zNJO6nCILnUjXoM6uBn4pTULXM98bIC+yuuFeKo76Q4P2o4m35TMPTfE1jDGifPOuRKImwSQLVdDjEd09NtPMBB38Sc8G+58iqmbnO/GU5aF0v7llfsWBl0MIxT2uujTHfL9g1Q+XJBZ1OSIKOIjL6xBCQWVbcxb1q+FXccAmp0ygFbeBlSksCLrQlRA42ifDu5LvKlUj9rDL6l2UBdJvnmRSzoUctsvG4AdltVLiKatWuOWwLiCR3mraVGIU4CJok/BpVh2D19esg3FpTi7LWMNZzbE9xWH+qwCM/yMSUYVtM/vY1tYr6StTfx5y+mxZGpMo6z4tOQr3wpczXevzLvUri+4mhnlo/Gkk1CNHoh3h91A8chdLKG2h0ZJBv/tUHwgUpDDsiw2/gWhHW9sFxdT/yS0syXaNBnAlYFY+f+UF0HjaPpoXCwPJzWBVBsCNxe2noi6O/MNkb9lLWeqv2TlXtoXgAYFN7qdVOsp/0BdPWjh1NCwijdjApYi6AteDVH0Akq7UfDBzZtDDWSOfEG+kZE4RBGLUlCF0+Hv8jWL/Gf+1G0xLEdZOJKEbXp8SV+Mx616dGOpqWTDfTyvB/2P8NLejhK+nORKkAAAAASUVORK5CYII=">
-                    <div id="logotext">
-                        <small>I &#9825; Programming</small>
-                    </div>
+        <nav>
+            <div class="logo">
+                <a href="./index.html">
+                    <img id="logoimage" src="data:image/png;base64,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"/>     
                 </a>
             </div>
-            <ul id="menu">
-                <li>
-                    <div class="menuitem">
-                        <a href="./index.html">
-                            <div>Home</div>
-                        </a>
-                    </div>
-                </li>
-               <li>
-                    <div class="menuitem">
-                        <a href="./blog.html">
-                            <div>Blog</div>
-                        </a>
-                    </div>
-                </li>
+            <ul class="nav-links">
+                <li><a href="./index.html">Home</a></li>
+                <li><a href="./blog.html">Blog</a></li>
             </ul>
-            <div id="contact">
-                <a href="https://github.com/TanLeYang" class="github" target="_blank" title="GitHub">
-                    <svg viewBox="0 0 512 512">
-                    <g fill="FA9B39">
-                        <path d="M256 70.7c-102.6 0-185.9 83.2-185.9 185.9 0 82.1 53.3 151.8 127.1 176.4 9.3 1.7 12.3-4 12.3-8.9V389.4c-51.7 11.3-62.5-21.9-62.5-21.9 -8.4-21.5-20.6-27.2-20.6-27.2 -16.9-11.5 1.3-11.3 1.3-11.3 18.7 1.3 28.5 19.2 28.5 19.2 16.6 28.4 43.5 20.2 54.1 15.4 1.7-12 6.5-20.2 11.8-24.9 -41.3-4.7-84.7-20.6-84.7-91.9 0-20.3 7.3-36.9 19.2-49.9 -1.9-4.7-8.3-23.6 1.8-49.2 0 0 15.6-5 51.1 19.1 14.8-4.1 30.7-6.2 46.5-6.3 15.8 0.1 31.7 2.1 46.6 6.3 35.5-24 51.1-19.1 51.1-19.1 10.1 25.6 3.8 44.5 1.8 49.2 11.9 13 19.1 29.6 19.1 49.9 0 71.4-43.5 87.1-84.9 91.7 6.7 5.8 12.8 17.1 12.8 34.4 0 24.9 0 44.9 0 51 0 4.9 3 10.7 12.4 8.9 73.8-24.6 127-94.3 127-176.4C441.9 153.9 358.6 70.7 256 70.7z"/>
-                        </g>
-                    </svg>
-                </a>
-           </div>
-        </div>
-        <div id="content">
+            <div class="burger">
+                <div class="line1"></div>
+                <div class="line2"></div>
+                <div class="line3"></div>
+            </div>
+        </nav>
+       <div id="content">
            <h1 id="pagetitle">{{.PageTitle}}</h1>
             {{.Content}}
         </div>
    </body>
+   <script>
+        function navSlide() {
+            const burger = document.querySelector(".burger");
+            const nav = document.querySelector(".nav-links");
+            const navLinks = document.querySelectorAll(".nav-links li");
+            
+            burger.addEventListener("click", () => {
+                //Toggle Nav
+                nav.classList.toggle("nav-active");
+                
+                //Animate Links
+                navLinks.forEach((link, index) => {
+                    if (link.style.animation) {
+                        link.style.animation = ""
+                    } else {
+                        link.style.animation = `navLinkFade 0.5s ease forwards ${index / 7 + 0.5}s`;
+                    }
+                });
+                //Burger Animation
+                burger.classList.toggle("toggle");
+            });
+        }
+        navSlide();
+   </script> 
 </html>
